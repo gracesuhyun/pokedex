@@ -25,3 +25,16 @@ let pokemonList = [
         types: ['fairy', 'normal']
     }
 ];
+
+// To list just the pokemon names:
+// for (let i=0; i < pokemonList.length; i++) {
+//     document.write(pokemonList[i].name);
+// }
+
+for (let i = 0; i < pokemonList.length; i++) {
+    if(pokemonList[i].height > 1) {
+        document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ")" + " - Wow that's a big pokemon!<br>")
+    } else {
+        document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ")<br>")
+    }
+}
