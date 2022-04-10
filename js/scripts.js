@@ -27,31 +27,42 @@ let pokemonRepository = (function () {
         }
     ];
 
-    function add(pokemon) {
-        if (
-            typeof pokemon === 'object' &&
-            "name" in pokemon &&
-            "height" in pokemon &&
-            "types" in pokemon
-        ) {
-            pokemonList.push(pokemon);
-        } else {
-            console.log("pokemon is not correct");
-        }
-    }
-
     function getAll() {
         return pokemonList;
     }
+
+    function add(pokemon) {
+        if (
+            typeof pokemon === 'object' &&
+            'name' in pokemon &&
+            'height' in pokemon &&
+            'types' in pokemon
+        ) {
+            pokemonList.push(pokemon);
+        } else {
+            console.log('Must be a pokemon with name, height, and type(s)');
+        }
+    }
+
     function addListItem(pokemon){
-        let pokemonList = document.querySelector('.pokemon-list');
+        let callPokemonList = document.querySelector('.pokemon-list');
         let listPokemon = document.createElement('li');
         let button = document.createElement('button');
+        //button features
         button.innerText = pokemon.name;
-        button.classList.add('button-class'); //taken from CSS
+        button.classList.add('pokemon-buttons'); //taken from CSS
         listPokemon.appendChild(button);
-        pokemonList.appendChild(listPokemon);
+        callPokemonList.appendChild(listPokemon);
+        //button event listener on click
+        button.addEventListener('click', function() {
+            showDetails(pokemon.name);
+        });
     }
+
+    function showDetails(pokemon) {
+        console.log(pokemon);
+    }
+
     return {
         add: add,
         getAll: getAll,

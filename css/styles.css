@@ -1,4 +1,12 @@
-.button-class {
+.pokedex-heading {
+    margin-left: 50px;
+}
+
+.pokemon-list {
+    list-style-type: none;
+}
+
+.pokemon-buttons {
     background-color: #4caf50;
     border: none;
     color: white;
