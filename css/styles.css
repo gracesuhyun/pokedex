@@ -1,5 +1,5 @@
 .pokedex-heading {
-    margin-left: 50px;
+    margin-left: 82px;
 }
 
 .pokemon-list {
@@ -16,6 +16,7 @@
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
+    min-width: 200px;
     -webkit-transition-duration: 0.4s; /*Safari*/
     transition-duration: 0.4s;
     cursor: pointer;
