@@ -1,5 +1,9 @@
+.loading-screen {
+    display: none;
+}
+
 .pokedex-heading {
-    margin-left: 82px;
+    margin-left: 85px;
 }
 
 .pokemon-list {

@@ -1,47 +1,30 @@
-let pokemonRepository = (function () {
-    let pokemonList = [
-        {
-            name: 'Bulbasaur',
-            height: 0.7,
-            types: ['grass', 'poison']
-        },
-        {
-            name: 'Charizard',
-            height: 1.7,
-            types: ['fire', 'flying']
-        },
-        {
-            name: 'Butterfree',
-            height: 1.1,
-            types: ['bug', 'flying']
-        },
-        {
-            name: 'Pikachu',
-            height: 0.4,
-            types: ['electric']
-        },
-        {
-            name: 'Jigglypuff',
-            height: 0.5,
-            types: ['fairy', 'normal']
-        }
-    ];
+function showLoadingMessage() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    loadingScreen.classList.remove('.loading-screen');
+}
 
-    function getAll() {
-        return pokemonList;
-    }
+function hideLoadingMessage() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    loadingScreen.classList.add('.loading-screen');
+}
+
+let pokemonRepository = (function () {
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function add(pokemon) {
         if (
             typeof pokemon === 'object' &&
-            'name' in pokemon &&
-            'height' in pokemon &&
-            'types' in pokemon
+            'name' in pokemon
         ) {
-            pokemonList.push(pokemon);
+            pokemonList.push(pokemon);  //push pokemon into the array
         } else {
-            console.log('Must be a pokemon with name, height, and type(s)');
+            console.log('Must be a Pokemon with correct description');
         }
+    }
+
+    function getAll() {
+        return pokemonList;
     }
 
     function addListItem(pokemon){
@@ -53,34 +36,81 @@ let pokemonRepository = (function () {
         button.classList.add('pokemon-buttons'); //taken from CSS
         listPokemon.appendChild(button);
         callPokemonList.appendChild(listPokemon);
-        //button event listener on click
-        button.addEventListener('click', function() {
-            showDetails(pokemon.name);
+        //button event listener that executes showDetails function when a pokemon button is clicked on
+        button.addEventListener('click', function(event) {
+            showDetails(pokemon);
         });
     }
 
-    function showDetails(pokemon) {
-        console.log(pokemon);
+    //the result of this fetch function is a promise (response) that is then converted to json
+    function loadList() {
+        showLoadingMessage();
+        return fetch(apiUrl).then(function (response) {
+            return response.json();  //json is the contents of the apiUrl
+        }).then(function (json) {
+            json.results.forEach(function(item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+                hideLoadingMessage();
+                // console.log(pokemon);  //this lists each pokemon object in the console
+            });
+        }).catch(function(e) {
+            hideLoadingMessage();
+            console.error(e);
+        })
+    }
+
+    function loadDetails(item) {
+        showLoadingMessage();
+        let url = item.detailsUrl;
+        return fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(details) {
+            //add details to item
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types; //create a way to iterate through item.url using a for loop that will push it into an array of types and show to users 
+            hideLoadingMessage();
+        }).catch(function(e) {
+            hideLoadingMessage();
+            console.error(e);
+        });
+    }
+
+    function showDetails(item) {
+        pokemonRepository.loadDetails(item).then(function () {
+            console.log(item);
+        });
     }
 
     return {
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails
     };
 }) ();
 
-pokemonRepository.add( {
-    name: 'Alakazam',
-    height: 1.5,
-    types: ['physic'] 
+//adding pokemon manually
+// pokemonRepository.add( {
+//     name: 'cresselia',
+//     height: 1.5,
+//     types: ['physic'] 
+// });
+
+// console.log(pokemonRepository.getAll());
+
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
 
-console.log(pokemonRepository.getAll());
 
-pokemonRepository.getAll().forEach(function(pokemon) {
-    pokemonRepository.addListItem(pokemon);
-});
 
 
 
