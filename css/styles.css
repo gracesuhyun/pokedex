@@ -1,30 +1,120 @@
-.loading-screen {
-    display: none;
+:root {
+    --red-text: #A94242;
 }
 
+* {
+    box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+}
+
+body {
+    color: var(--red-text);
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 2.75;
+    margin: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* .loading-screen {
+    display: none;
+} */
+
 .pokedex-heading {
-    margin-left: 85px;
+    margin: auto;
+    max-width: 300px;
 }
 
 .pokemon-list {
     list-style-type: none;
+    text-decoration: none;
+    justify-content: center;
+    height: 350px;
+    padding: 0px 0px;
+    margin: auto;
+    width: 400px;
+    overflow: auto;
+    border: 5px solid var(--red-text);
+    border-radius: 10px;
 }
 
 .pokemon-buttons {
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    min-width: 200px;
-    -webkit-transition-duration: 0.4s; /*Safari*/
-    transition-duration: 0.4s;
+    margin: auto;
+    min-height: 40px;
+    width: 225px;
+    font-weight: 100;
+    font-size: 18px;
+    border: groove;
+    border-radius: 20px;
+}
+
+.pokemon-buttons:hover {
+    background-color: var(--red-text);
     cursor: pointer;
-    background-color: white;
+    transform: scale(1.05, 1.05);
+    color: white;
+}
+
+.modal-container {
+    display: none;
+}
+
+.modal-container.is-visible {
+    display: block;
+    box-sizing: border-box;
+    position: fixed;
+    padding: 10px;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    overflow: auto;
+    text-align: center;
+}
+
+.modal {
+    background: white;
+    margin-top: 120px;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 15px;
+    width: 370px;
+    height: 310px;
+    text-align: left;
+}
+
+.modal-close {
+    float: right;
+    -webkit-appearance: none;
+    border: 3;
+    border-radius: 25%;
+    background: none;
     color: black;
-    border: 2px solid #4caf50;
+    text-decoration: none;
+}
+
+.modal-close:hover {
+    background: var(--red-text);
+    color: white;
+    cursor: pointer;
+}
+
+h3 {
+    line-height: 1;
+    text-align: center;
+}
+
+p {
+    line-height: 1;
+}
+
+.image-element {
+    display: block;
+    height: 100px;
+    width: auto;
+    margin: 0 auto;
 }
