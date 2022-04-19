@@ -166,6 +166,8 @@ pokemonRepository.loadList().then(function() {
 
 
 
+// To list pokemon names & specify if size is big:
+
 // for (let i = 0; i < pokemonList.length; i++) {
 //     if (pokemonList[i].height > 1) {
 //         document.write("<p>" + pokemonList[i].name + " (height: " + pokemonList[i].height + ")" + " - Wow that's a big pokemon!</p>")
@@ -173,6 +175,8 @@ pokemonRepository.loadList().then(function() {
 //         document.write("<p>" + pokemonList[i].name + " (height: " + pokemonList[i].height + ")</p>")
 //     }
 // }
+
+
 
 
 
