@@ -15,7 +15,7 @@
     <body>
         
         <!--Page Header-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,27 +28,29 @@
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0">
-                <input class="form-control rounded" id="myInput" type="search" placeholder="Search" aria-label="Search"/>
+                <input class="form-control mr-sm-2" id="search-pokemon" type="search" placeholder="Search" aria-label="Search" onkeyup="pokemonRepository.searchPokemon(value)">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
               </form>
             </div>
           </nav>
 
         <div class="container page-container">
             <!-- Modal -->
-            <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="Pokemon Details" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="col-12 modal-title text-capitalize" id="exampleModalLabel"></h5>
-                      </div>
-                      <div class="modal-body text-capitalize">...</div>
-                      <div>
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">X</button>
-                      </div>
+            <ul class="pokemon-list list-group">
+                <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="Pokemon Details" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="col-12 modal-title text-capitalize" id="exampleModalLabel"></h5>
+                        </div>
+                        <div class="modal-body text-capitalize">...</div>
+                        <div>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">X</button>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
-
+            </ul>
                   <!--Pokemon List-->
             <div class="list-container" id="pokemon-list">
                 <div class="row list-group flex-row flex-wrap justify-content-around list-unstyled"></div>
