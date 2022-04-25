@@ -16,21 +16,23 @@
         
         <!--Page Header-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="page-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand text-danger" href="index.html" id="home-link">Pokedex</a>
-          
-            <div class="collapse navbar-collapse">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" href="https://gracesuhyun.github.io/portfolio-website" id="portfolio-link">View My Full Portfolio</a>
-                </li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search Pokemon" aria-label="Search" onkeyup="pokemonRepository.searchPokemon(value)">
-                <button class="btn btn-dark" type="submit">Back</button>
-            </form>
+            <div class="container-fluid">
+                <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="#navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand text-danger" href="index.html" id="home-link">Pokedex</a>
+            
+                <div class="collapse navbar-collapse" id="navbarHeader">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="https://gracesuhyun.github.io/portfolio-website" id="portfolio-link">View My Full Portfolio</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Pokemon" aria-label="Search" onkeyup="pokemonRepository.searchPokemon(value)">
+                    <button class="btn btn-dark" type="submit">Back</button>
+                </form>
+                </div>
             </div>
         </nav>
 
