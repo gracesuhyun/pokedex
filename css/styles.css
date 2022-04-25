@@ -14,10 +14,8 @@
 
 body {
 	background-color: var(--background);
-    margin-top: 30px;
     padding: 0px;
 }
-
 .pokemon-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
