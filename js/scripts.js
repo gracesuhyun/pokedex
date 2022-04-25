@@ -30,8 +30,8 @@ let pokemonRepository = (function () {
         });
     }
 
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+    function capitalizeFirstLetter(pokemon) {
+        return pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
     }
 
     function getAll() {
@@ -47,16 +47,16 @@ let pokemonRepository = (function () {
 
         //Button Features
         button.innerText = pokemon.name;
-        button.classList.add('pokemon-buttons','btn'); //taken from CSS
+        button.classList.add('pokemon-buttons','btn');
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#pokemonModal');
-        pokemonRepository.handleButtonClick(button,pokemon); //event listener
+        pokemonRepository.handleButtonClick(button, pokemon); //event listener
         pokemonListItem.appendChild(button);
         pokemonList.appendChild(pokemonListItem);
     }
 
     //event listener that executes showDetails function when a pokemon button is clicked on
-    function handleButtonClick(button,pokemon) {
+    function handleButtonClick(button, pokemon) {
         button.addEventListener('click', function() {
             showDetails(pokemon);
         });
@@ -128,15 +128,6 @@ let pokemonRepository = (function () {
         modalBody.append(pokemonTypes);
     
       }
-    
-    //   $(document).ready(function(){
-    //   $('#myInput').on('keyup', function() {
-    //   let value = $(this).val().toLowerCase();
-    //   $(".search-button").filter(function() {
-    //   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    //   });
-    //   });
-    //   });
 
     return {
         add: add,
@@ -157,8 +148,6 @@ let pokemonRepository = (function () {
 //     height: 1.5,
 //     types: ['physic'] 
 // });
-
-// console.log(pokemonRepository.getAll());
 
 pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon) {
