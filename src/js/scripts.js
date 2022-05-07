@@ -8,50 +8,66 @@ let pokemonRepository = (function () {
             'name' in pokemon &&
             'detailsUrl' in pokemon
         ) {
-            pokemonList.push(pokemon);  //push pokemon into the array
+            pokemonList.push(pokemon);  //pushes or adds pokemon into the array
         } else {
-            console.log('Must be a Pokemon with correct description');
+            console.log('Error: Must be a Pokemon with correct description!');
         }
     }
 
-    function filter(name) {
-        return pokemonList.filter(pokemonList => pokemonList.name === name);
-    }
-
-    function searchPokemon(searchName) {
-        //clear all buttons when search bar is used
-        $('.pokemon-list').empty();
-        //show searched pokemon(s) when search bar is used
-        pokemonList.forEach(pokemon => {
-            if (capitalizeFirstLetter(pokemon.name).indexOf(
-                capitalizeFirstLetter(searchName)) > -1) {
-                    addListItem(pokemon);
-                }
-        });
-    }
-
-    function capitalizeFirstLetter(pokemon) {
-        return pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
-    }
-
+    //retrieves all items from apiUrl? is this required for any js code retrieving info from API?
     function getAll() {
         return pokemonList;
     }
 
-    //create pokemon buttons
-    function addListItem(pokemon){
+    //this fetch function is a promise that allows all the items pushed to run asynchronously
+    function loadList() {
+        return fetch(apiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (json) {
+            console.log(json);
+            json.results.forEach(function(item, index) {
+                let link = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`
+                let pokemon = {
+                    image: link,
+                    name: capitalizeFirstLetter(item.name),
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+                // console.log(pokemon);  //this lists each pokemon object in the console
+            });
+        })
+        //in the case of the call to API failing...
+        .catch(function(e) {
+            console.error(e);
+        });
+    }
+
+    //create pokemon buttons (create, do, append)
+    function addListItem(pokemon, index){
+
         let pokemonList = document.querySelector('.list-group');
+
+        //we created a list element 
         let pokemonListItem = document.createElement('li');
+
+        //we did a bunch of stuff to list element
         pokemonListItem.classList.add('group-list-item');
         let button = document.createElement('button');
+        let image = document.createElement('img');
+        image.setAttribute('src', pokemon.image);
 
-        //Button Features
         button.innerText = pokemon.name;
         button.classList.add('pokemon-buttons','btn');
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#pokemonModal');
+        button.appendChild(image);
         pokemonRepository.handleButtonClick(button, pokemon); //event listener
+
         pokemonListItem.appendChild(button);
+
+        //we pushed it to pokemonList on line 50
         pokemonList.appendChild(pokemonListItem);
     }
 
@@ -62,35 +78,10 @@ let pokemonRepository = (function () {
         });
     }
 
-    function showDetails(pokemon) {
-        loadDetails(pokemon).then(function () {
-            console.log(pokemon);
-            showModal(pokemon);  //call showModal function when a pokemon button is clicked on
-        });
-    }
-
-    //the result of this fetch function is a promise (response) that is then converted to json
-    function loadList() {
-        return fetch(apiUrl).then(function (response) {
-            return response.json();  //json is the contents of the apiUrl
-        }).then(function (json) {
-            json.results.forEach(function(item) {
-                let pokemon = {
-                    name: capitalizeFirstLetter(item.name),
-                    detailsUrl: item.url
-                };
-                add(pokemon);
-                // console.log(pokemon);  //this lists each pokemon object in the console
-            });
-        })
-        .catch(function(e) {
-            console.error(e);
-        });
-    }
-
     function loadDetails(item) {
         let url = item.detailsUrl;
-        return fetch(url).then(function(response) {
+        return fetch(url)
+        .then(function(response) {
             return response.json();
         })
         .then(function(details) {
@@ -102,6 +93,13 @@ let pokemonRepository = (function () {
         })
         .catch(function(e) {
             console.error(e);
+        });
+    }
+
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+            showModal(pokemon);  //call showModal function when a pokemon button is clicked on
         });
     }
 
@@ -126,12 +124,26 @@ let pokemonRepository = (function () {
         modalBody.append(pokemonHeight);
         modalBody.append(pokemonWeight);
         modalBody.append(pokemonTypes);
-    
-      }
+    }
+
+    function capitalizeFirstLetter(pokemon) {
+        return pokemon.charAt(0).toUpperCase() + pokemon.slice(1);
+    }
+
+    function searchPokemon(searchName) {
+        //clear all buttons when search bar is used
+        $('.pokemon-list').empty();
+        //show searched pokemon(s) when search bar is used
+        pokemonList.forEach(pokemon => {
+            if (capitalizeFirstLetter(pokemon.name).indexOf(
+                capitalizeFirstLetter(searchName)) > -1) {
+                    addListItem(pokemon);
+                }
+        });
+    }
 
     return {
         add: add,
-        filter: filter,
         searchPokemon: searchPokemon,
         getAll: getAll,
         addListItem: addListItem,
@@ -142,20 +154,13 @@ let pokemonRepository = (function () {
     };
 }) ();
 
-//adding pokemon manually
-// pokemonRepository.add( {
-//     name: 'cresselia',
-//     height: 1.5,
-//     types: ['physic'] 
-// });
-
 pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon) {
         pokemonRepository.addListItem(pokemon);
     });
 });
 
-
+console.log(pokemonList, 'pokemonList');
 
 
 
