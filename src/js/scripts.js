@@ -14,7 +14,6 @@ let pokemonRepository = (function () {
         }
     }
 
-    //retrieves all items from apiUrl? is this required for any js code retrieving info from API?
     function getAll() {
         return pokemonList;
     }
