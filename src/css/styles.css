@@ -35,6 +35,14 @@ body {
     font-weight: 600;
     transition: 0.4s;
 }
+
+.modal-content {
+    padding-bottom: 30px;
+    border: 6px solid var(--red);
+    box-shadow: 16ps 14px 20px #0000008c;
+    border-radius: 10px;
+    max-width: 450px;
+}
   
 .pokemon-buttons:hover {
     background-color: var(--red);
