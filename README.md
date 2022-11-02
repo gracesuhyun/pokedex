@@ -4,7 +4,15 @@
 <img src="img/pokedex_screenshot2.PNG" alt="App demonstration">
 
 ## Description
-This is a simple Pokedex app with HTML, CSS, and JavaScript that loads data from [PokeAPI](https://pokeapi.co/) and enables the viewing of Pokemon in detail. Users are also able to search for a specific Pokemon by name.
+This is a fully functioning JavaScript web app built with HTML and CSS. Its main function is to fetch data from on external data source called [PokeAPI](https://pokeapi.co/) and enable the viewing of each Pokemon in detail.
+
+## User Goals
+Users should be able to view a list of Pokemon names and see more details for a given Pokemon on demand, as well as search for a name.
+
+## Key Features
+- Load data from an external source (API)
+- View a list of items
+- On user action (e.g., by clicking on a list item), view details for that item
 
 ## Link
 [Pokedex Website](https://gracesuhyun.github.io/pokedex)
