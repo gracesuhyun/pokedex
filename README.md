@@ -14,5 +14,5 @@ Users should be able to view a list of Pokemon names and see more details for a 
 - View a list of items
 - On user action (e.g., by clicking on a list item), view details for that item
 
-## Link
+## Project Link
 [Pokedex Website](https://gracesuhyun.github.io/pokedex)
